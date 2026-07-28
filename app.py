@@ -10,11 +10,14 @@ from werkzeug.utils import secure_filename
 from werkzeug.security import generate_password_hash,check_password_hash
 import uuid
 import datetime
+import resend
 load_dotenv()
 app = Flask(__name__)
 MAIL_USERNAME = os.getenv("MAIL_USERNAME")
 MAIL_PASSWORD = os.getenv("MAIL_PASSWORD")
 SECRET_KEY = os.getenv("SECRET_KEY")
+RESEND_API_KEY = os.getenv("RESEND_API_KEY")
+resend.api_key = RESEND_API_KEY
 app.secret_key=SECRET_KEY
 app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv("DATABASE_URL")
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
@@ -154,7 +157,7 @@ def signupuser():
         hashed_password = generate_password_hash(password)
         branch = request.form['branch']
         section = request.form['sec']
-        tomail = request.form['email']
+        tomail = request.form['email'].strip().lower()
         profile = request.files['profilepic']
         filename='default.png'
         if profile and profile.filename != "":
@@ -190,27 +193,53 @@ def signupuser():
             #Send the otp via email
             otp = random.randint(100000,999999)
             session['signup_otp'] = otp
-            signup_server = smtplib.SMTP('smtp.gmail.com',587)
-            signup_server.starttls()
-            signup_server.login(MAIL_USERNAME,MAIL_PASSWORD)
-            msg = EmailMessage()
-            msg['Subject'] = 'OTP VERIFICATION'
-            msg['From'] = MAIL_USERNAME
-            msg['To'] = tomail
-            msg.set_content(
-                f"""
-                Hello
+            try:
+                print("Sending OTP to:", tomail)
+                print("My verified email:", "harshadityag@gmail.com")
+                resend.Emails.send({
+                    "from": "VConnect <onboarding@resend.dev>",
+                    "to": [tomail],
+                    "subject": "OTP Verification - VConnect",
+                    "text": f"""
+                    Hello,
 
-                Your OTP for VConnect is: {otp}
+                    Your OTP for VConnect is: {otp}
 
-                Do not share this OTP with anyone.
+                    Do not share this OTP with anyone.
 
-                Regards,
-                Team VConnect
-                """)
-            signup_server.send_message(msg)
-            signup_server.quit()
-            print(session['signup_data'])
+                    Regards,
+                    Team VConnect
+                    """
+                })
+
+
+
+                # signup_server = smtplib.SMTP('smtp.gmail.com',587,timeout=10)
+                # signup_server.starttls()
+                # signup_server.login(MAIL_USERNAME,MAIL_PASSWORD)
+                # msg = EmailMessage()
+                # msg['Subject'] = 'OTP VERIFICATION'
+                # msg['From'] = MAIL_USERNAME
+                # msg['To'] = tomail
+                # msg.set_content(
+                #     f"""
+                #     Hello
+
+                #     Your OTP for VConnect is: {otp}
+
+                #     Do not share this OTP with anyone.
+
+                #     Regards,
+                #     Team VConnect
+                #     """)
+                # signup_server.send_message(msg)
+                # signup_server.quit()
+            except Exception as e:
+                print("Resend error:", e)
+                return render_template(
+                    "signup.html",
+                    message=f"Unable to send otp. Please try again"
+                )
             return redirect('/verifyotp')
 
     else:
