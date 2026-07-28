@@ -16,7 +16,8 @@ MAIL_USERNAME = os.getenv("MAIL_USERNAME")
 MAIL_PASSWORD = os.getenv("MAIL_PASSWORD")
 SECRET_KEY = os.getenv("SECRET_KEY")
 app.secret_key=SECRET_KEY
-app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///database.db"
+app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv("DATABASE_URL")
+app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 app.config['UPLOAD_FOLDER'] = 'static/profile_pics'
 db = SQLAlchemy(app)
 
@@ -191,7 +192,7 @@ def signupuser():
             session['signup_otp'] = otp
             signup_server = smtplib.SMTP('smtp.gmail.com',587)
             signup_server.starttls()
-            signup_server.login(MAIL_USERNAME,MAIL_USERNAME)
+            signup_server.login(MAIL_USERNAME,MAIL_PASSWORD)
             msg = EmailMessage()
             msg['Subject'] = 'OTP VERIFICATION'
             msg['From'] = MAIL_USERNAME
@@ -236,11 +237,30 @@ def verify():
                 email = data['email'],
                 profile_pic = data['profile_pic']
             )
-            db.session.add(newsignup_user)
-            db.session.commit()
-            session.pop('signup_data', None)
-            session.pop('signup_otp', None)
-            return redirect('/login')
+            existing_user = User.query.filter_by(
+                admission_number=data['admission']
+            ).first()
+            if existing_user:
+                return render_template(
+                    'verifyotp.html',
+                    message="Account already exists. Please login."
+                )
+            try:
+                db.session.add(newsignup_user)
+                db.session.commit()
+
+                # Success
+                session.pop('signup_data', None)
+                session.pop('signup_otp', None)
+                return redirect('/login')
+
+            except Exception as e:
+                db.session.rollback()
+                print(e)
+                return render_template(
+                    'verifyotp.html',
+                    message="Something went wrong. Please try again."
+                )
         else:
             return render_template('verifyotp.html',message='Invalid OTP')
     return render_template('verifyotp.html')
