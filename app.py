@@ -4,13 +4,18 @@ from sqlalchemy import or_
 import smtplib
 import random
 from email.message import EmailMessage
+from dotenv import load_dotenv
 import os
 from werkzeug.utils import secure_filename
 from werkzeug.security import generate_password_hash,check_password_hash
 import uuid
 import datetime
+load_dotenv()
 app = Flask(__name__)
-app.secret_key="Azby"
+MAIL_USERNAME = os.getenv("MAIL_USERNAME")
+MAIL_PASSWORD = os.getenv("MAIL_PASSWORD")
+SECRET_KEY = os.getenv("SECRET_KEY")
+app.secret_key=SECRET_KEY
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///database.db"
 app.config['UPLOAD_FOLDER'] = 'static/profile_pics'
 db = SQLAlchemy(app)
@@ -186,10 +191,10 @@ def signupuser():
             session['signup_otp'] = otp
             signup_server = smtplib.SMTP('smtp.gmail.com',587)
             signup_server.starttls()
-            signup_server.login('Harshadityag@gmail.com','bsnq dzkf cagw zthp')
+            signup_server.login(MAIL_USERNAME,MAIL_USERNAME)
             msg = EmailMessage()
             msg['Subject'] = 'OTP VERIFICATION'
-            msg['From'] = 'harshadityag@gmail.com'
+            msg['From'] = MAIL_USERNAME
             msg['To'] = tomail
             msg.set_content(
                 f"""
@@ -253,10 +258,10 @@ def forgot():
             if checkemail:
                 server = smtplib.SMTP('smtp.gmail.com',587)
                 server.starttls()
-                server.login('harshadityag@gmail.com','bsnq dzkf cagw zthp')
+                server.login(MAIL_USERNAME,MAIL_PASSWORD)
                 msg = EmailMessage()
                 msg['Subject']='EMAIL VERIFICATION'
-                msg['From'] = 'harshadityag@gmail.com'
+                msg['From'] = MAIL_USERNAME
                 msg['To'] = tomail
                 msg.set_content(
                 f"""
