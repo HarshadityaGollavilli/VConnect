@@ -1,0 +1,155 @@
+{% extends 'basic.html' %}
+
+{% block head %}
+{{ super() }}
+<title>Dashboard | VConnect</title>
+
+<link rel="stylesheet"
+href="{{ url_for('static', filename='dashboard.css') }}">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+{% endblock %}
+
+{% block body %}
+
+<div class="dashboard">
+
+    <!-- ================= NAVBAR ================= -->
+
+    <!-- ================= NAVBAR ================= -->
+
+    <!-- <nav class="navbar">
+
+        <div class="logo">
+            <h1>VCONNECT</h1>
+        </div>
+
+        <ul class="nav-links">
+
+            <li><a href="#">Home</a></li>
+
+            <li><a href="#">Alumni</a></li>
+
+            <li><a href="/jobs">Jobs</a></li>
+
+            <li><a href="#">Events</a></li>
+
+            <li><a href="#">Messages</a></li>
+
+        </ul>
+
+        <div class="nav-right">
+
+            <div class="profile-menu">
+
+                <img
+                    src="{{ url_for('static', filename='profile_pics/' + user.profile_pic) }}"
+                    alt="Profile"
+                    class="nav-profile">
+
+                <span>{{ user.name.split()[0] }}</span>
+
+                <i class="fa-solid fa-chevron-down"></i>
+
+                <div class="dropdown">
+
+                    <a href="/profile">
+                        <i class="fa-regular fa-user"></i>
+                        My Profile
+                    </a>
+
+                    <a href="#">
+                        <i class="fa-solid fa-gear"></i>
+                        Settings
+                    </a>
+
+                    <hr>
+
+                    <a href="/logout" class="logout-link">
+                        <i class="fa-solid fa-right-from-bracket"></i>
+                        Logout
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </nav> -->
+
+    <!-- ================= HERO SECTION ================= -->
+
+    <section class="hero">
+
+        <div class="hero-left">
+
+            <h1>
+
+                Welcome Back,
+
+                {{ user.name.split()[0] }} 👋
+
+            </h1>
+
+            <p>
+
+                Stay connected with your alumni network.
+
+                Discover internships, job opportunities,
+
+                upcoming events and build meaningful
+
+                professional relationships through VConnect.
+
+            </p>
+
+            <div class="hero-buttons">
+
+                <a href="/alumni" class="primary-btn">
+
+                    Explore Alumni
+
+                </a>
+
+                <a href="/browsejobs" class="secondary-btn">
+
+                    Browse Jobs
+
+                </a>
+
+            </div>
+
+        </div>
+
+        <div class="hero-right">
+
+            <div class="hero-card">
+
+                <img
+
+                src="{{ url_for('static', filename='profile_pics/' + user.profile_pic) }}"
+
+                class="hero-profile">
+
+                <h2>{{ user.name }}</h2>
+
+                <p>{{ user.branch }} • Section {{ user.section }}</p>
+
+                <small>{{ user.email }}</small>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- ================= QUICK STATS ================= -->
+
+    <!-- We'll add this in Part 2 -->
+
+</div>
+
+{% endblock %}

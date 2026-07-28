@@ -1,0 +1,78 @@
+{% extends 'basic.html' %}
+
+{% block head %}
+{{ super() }}
+<title>Jobs | VConnect</title>
+
+<link rel="stylesheet"
+      href="{{ url_for('static',filename='jobs.css') }}">
+
+{% endblock %}
+
+{% block body %}
+
+<div class="jobs-home">
+
+    <div class="page-title">
+
+        <h1>Career Opportunities</h1>
+
+        <p>
+            Explore opportunities shared by alumni or help the community by posting one.
+        </p>
+
+    </div>
+
+    <div class="job-options">
+
+        <div class="option-card">
+
+            <div class="icon">
+                💼
+            </div>
+
+            <h2>Browse Jobs</h2>
+
+            <p>
+
+                View internships, placements and full-time opportunities
+                shared by alumni.
+
+            </p>
+
+            <a href="/browsejobs">
+
+                Browse Jobs
+
+            </a>
+
+        </div>
+
+        <div class="option-card">
+
+            <div class="icon">
+                📢
+            </div>
+
+            <h2>Share an Opportunity</h2>
+
+            <p>
+
+                Help juniors and fellow alumni by posting
+                an internship or job opening.
+
+            </p>
+
+            <a href="/addjob">
+
+                Post Job
+
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,101 @@
+{% extends 'basic.html' %}
+
+{% block head %}
+{{ super() }}
+<title>My Profile | VConnect</title>
+
+<link rel="stylesheet"
+href="{{ url_for('static', filename='profile.css') }}">
+
+{% endblock %}
+
+{% block body %}
+
+<!-- ================= NAVBAR ================= -->
+
+<nav class="navbar">
+
+    <div class="logo">
+        <h1>VCONNECT</h1>
+    </div>
+
+    <ul class="nav-links">
+        <li><a href="/dashboard">Home</a></li>
+        <li><a href="#">Alumni</a></li>
+        <li><a href="#">Jobs</a></li>
+        <li><a href="#">Events</a></li>
+        <li><a href="#">Messages</a></li>
+    </ul>
+
+    <div class="nav-right">
+
+        <img
+        src="{{ url_for('static', filename='profile_pics/' + user.profile_pic) }}"
+        class="nav-profile">
+
+        <span>{{ user.name.split()[0] }}</span>
+
+    </div>
+
+</nav>
+
+<!-- ================= PROFILE ================= -->
+
+<div class="profile-container">
+
+    <!-- LEFT CARD -->
+
+    <div class="left-card">
+
+        <img
+        src="{{ url_for('static', filename='profile_pics/' + user.profile_pic) }}"
+        class="hero-profile">
+
+        <h2>{{ user.name }}</h2>
+
+        <p>{{ user.branch }} • Section {{ user.section }}</p>
+
+        <small>Vasavi College Student</small>
+
+        <a href="/editprofile" class="edit-btn">
+            Edit Profile
+        </a>
+
+    </div>
+
+    <!-- RIGHT CARD -->
+
+    <div class="right-card">
+
+        <h2>Personal Information</h2>
+
+        <div class="info-row">
+            <div class="label">Admission Number</div>
+            <div class="value">{{ user.admission_number }}</div>
+        </div>
+
+        <div class="info-row">
+            <div class="label">College Email</div>
+            <div class="value">{{ user.email }}</div>
+        </div>
+
+        <div class="info-row">
+            <div class="label">Mobile Number</div>
+            <div class="value">{{ user.mobile_number }}</div>
+        </div>
+
+        <div class="info-row">
+            <div class="label">Branch</div>
+            <div class="value">{{ user.branch }}</div>
+        </div>
+
+        <div class="info-row">
+            <div class="label">Section</div>
+            <div class="value">{{ user.section }}</div>
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

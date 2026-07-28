@@ -1,0 +1,114 @@
+{% extends 'basic.html' %}
+
+{% block head %}
+
+<title>Job Details | VConnect</title>
+
+<link rel="stylesheet"
+      href="{{ url_for('static', filename='viewdetails.css') }}">
+
+{% endblock %}
+
+{% block body %}
+
+<div class="job-container">
+    <a href="/browsejobs" class="back-btn">
+    ← Back to Jobs
+    </a>
+
+    <div class="job-header">
+
+        <h1>{{ job.jobtitle }}</h1>
+
+        <h3>{{ job.companyname }}</h3>
+
+    </div>
+
+    <div class="job-meta">
+
+        <span>📍 {{ job.location }}</span>
+
+        <span>💼 {{ job.jobtype }}</span>
+
+        <span>💰 ₹{{ job.salary }}</span>
+
+        <span>📅 {{ job.dateposted.strftime('%d %b %Y') }}</span>
+
+    </div>
+
+    <div class="section">
+
+        <h2>Description</h2>
+
+        <p>{{ job.description }}</p>
+
+    </div>
+
+    <div class="section">
+
+        <h2>Required Skills</h2>
+
+        <div class="skills">
+
+            {% for skill in job.skillsreq.split(',') %}
+
+                <span class="skill-tag">{{ skill.strip() }}</span>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+    <div class="poster-card">
+
+        <img src="{{ url_for('static', filename='profile_pics/' + poster.profile_pic) }}"
+             class="profile-image">
+
+        <div>
+
+            <h3>{{ poster.name }}</h3>
+
+            <p>{{ poster.branch }}</p>
+
+        </div>
+
+    </div>
+
+    <div class="links">
+
+        {% if poster.linkedin %}
+            <a href="{{ poster.linkedin }}" target="_blank">
+                LinkedIn
+            </a>
+        {% endif %}
+
+        {% if poster.github %}
+            <a href="{{ poster.github }}" target="_blank">
+                GitHub
+            </a>
+        {% endif %}
+
+        {% if poster.portfolio %}
+            <a href="{{ poster.portfolio }}" target="_blank">
+                Portfolio
+            </a>
+        {% endif %}
+
+    </div>
+
+    <div class="apply">
+
+        <a href="{{ job.applicationlink }}"
+           target="_blank"
+           class="apply-btn">
+
+            Apply Now
+
+        </a>
+
+    </div>
+
+</div>
+
+{% endblock %}

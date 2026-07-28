@@ -1,0 +1,201 @@
+/* ================= GOOGLE FONT ================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
+/* ================= GLOBAL ================= */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+
+    background:#f5f7fb;
+
+}
+
+.dashboard{
+
+    min-height:100vh;
+
+}
+
+
+/* ================= HERO SECTION ================= */
+
+.hero{
+
+    display:grid;
+
+    grid-template-columns:2fr 1fr;
+
+    gap:35px;
+
+    align-items:stretch;
+
+}
+
+/* Left Card */
+
+.hero-left{
+
+    background:linear-gradient(135deg,#2563EB,#4f6ef7);
+
+    border-radius:22px;
+
+    color:white;
+
+    padding:60px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    box-shadow:0 12px 30px rgba(0,0,0,.12);
+
+}
+
+.hero-left h1{
+
+    font-size:48px;
+
+    margin-bottom:20px;
+
+}
+
+.hero-left p{
+
+    font-size:18px;
+
+    line-height:1.9;
+
+    width:90%;
+
+    margin-bottom:35px;
+
+}
+
+/* Buttons */
+
+.hero-buttons{
+
+    display:flex;
+
+    gap:20px;
+
+}
+
+.primary-btn{
+
+    text-decoration:none;
+
+    background:white;
+
+    color:#2563EB;
+
+    padding:14px 28px;
+
+    border-radius:10px;
+
+    font-weight:600;
+
+    transition:.3s;
+
+}
+
+.primary-btn:hover{
+
+    transform:translateY(-3px);
+
+}
+
+.secondary-btn{
+
+    text-decoration:none;
+
+    color:white;
+
+    border:2px solid white;
+
+    padding:14px 28px;
+
+    border-radius:10px;
+
+    transition:.3s;
+
+}
+
+.secondary-btn:hover{
+
+    background:white;
+
+    color:#2563EB;
+
+}
+
+/* ================= RIGHT CARD ================= */
+
+.hero-card{
+
+    background:white;
+
+    border-radius:22px;
+
+    padding:40px;
+
+    text-align:center;
+
+    box-shadow:0 8px 20px rgba(0,0,0,.08);
+
+    height:100%;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+}
+
+.hero-profile{
+
+    width:140px;
+
+    height:140px;
+
+    border-radius:50%;
+
+    object-fit:cover;
+
+    border:5px solid #2563EB;
+
+    margin-bottom:20px;
+
+}
+
+.hero-card h2{
+
+    color:#333;
+
+    margin-bottom:10px;
+
+}
+
+.hero-card p{
+
+    color:#666;
+
+    margin-bottom:8px;
+
+}
+
+.hero-card small{
+
+    color:#888;
+
+}

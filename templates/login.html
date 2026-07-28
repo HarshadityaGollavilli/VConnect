@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Login | VConnect</title>
+
+    <link rel="icon"
+          href="{{ url_for('static', filename='profile_pics/vconnectlogo.jpeg') }}">
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='loginpage.css') }}">
+
+</head>
+
+<body>
+
+<header>
+
+    <div class="logo">
+
+        <img src="{{ url_for('static', filename='profile_pics/vconnectlogo.jpeg') }}">
+
+        <h1>CONNECT</h1>
+
+    </div>
+
+    <nav>
+
+        <a href="/">Home</a>
+
+        <a href="/#about">About</a>
+
+        <a href="/#contact">Contact</a>
+
+    </nav>
+
+</header>
+
+<div class="container">
+
+    <div class="login-box">
+
+        <img src="{{ url_for('static', filename='profile_pics/vconnectlogo.jpeg') }}"
+             class="login-logo">
+
+        <h2>Welcome Back</h2>
+
+        <p class="subtitle">
+
+            Sign in to continue to VConnect
+
+        </p>
+
+        <form action="/login" method="POST">
+
+            <label>Admission Number</label>
+
+            <input
+                type="text"
+                name="admn"
+                placeholder="Enter Admission Number"
+                required>
+
+            <label>Registered Mobile Number</label>
+
+            <input
+                type="text"
+                name="mob"
+                placeholder="Enter Mobile Number"
+                required>
+
+            <label>Password</label>
+
+            <input
+                type="password"
+                name="pass"
+                placeholder="Enter Password"
+                required>
+
+            <div class="forgot-password">
+
+                <a href="/forgotpassword">
+
+                    Forgot Password?
+
+                </a>
+
+            </div>
+
+            {% if message %}
+
+            <p class="MSG">
+
+                {{ message }}
+
+            </p>
+
+            {% endif %}
+
+            <input
+                type="submit"
+                value="LOGIN">
+
+        </form>
+
+        <div class="signup-link">
+
+            Don't have an account?
+
+            <a href="/signup">
+
+                Create Account
+
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+
+</html>

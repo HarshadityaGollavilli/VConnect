@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="icon"
+          type="image/jpeg"
+          href="{{ url_for('static', filename='profile_pics/vconnectlogo.jpeg') }}">
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='basic.css') }}">
+
+    {% block head %}
+    {% endblock %}
+
+</head>
+
+<body>
+
+<header>
+
+    <div class="logo">
+
+        <a href="/dashboard">
+
+            <img src="{{ url_for('static', filename='profile_pics/vconnectlogo.jpeg') }}"
+                 alt="VConnect Logo">
+
+        </a>
+
+        <a href="/dashboard" class="logo-text">
+
+            CONNECT
+
+        </a>
+
+    </div>
+
+    <nav>
+
+        <a href="/dashboard">Dashboard</a>
+
+        <a href="/jobs">Jobs</a>
+
+        <a href="/alumni">Alumni</a>
+
+        <a href="/profile">Profile</a>
+
+        <a href="/logout" class="logout-btn">Logout</a>
+
+    </nav>
+
+</header>
+
+<main>
+
+    {% block body %}
+    {% endblock %}
+
+</main>
+
+</body>
+
+</html>

@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Sign Up | VConnect</title>
+
+    <link rel="icon"
+          href="{{ url_for('static', filename='profile_pics/vconnectlogo.jpeg') }}">
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='signup.css') }}">
+
+</head>
+
+<body>
+
+<header>
+
+    <div class="logo">
+
+        <img src="{{ url_for('static', filename='profile_pics/vconnectlogo.jpeg') }}">
+
+        <h1>CONNECT</h1>
+
+    </div>
+
+    <nav>
+
+        <a href="/">Home</a>
+
+        <a href="/#about">About</a>
+
+        <a href="/#contact">Contact</a>
+
+    </nav>
+
+</header>
+
+<div class="container">
+
+    <div class="signup-box">
+
+        <img
+            src="{{ url_for('static', filename='profile_pics/vconnectlogo.jpeg') }}"
+            class="signup-logo">
+
+        <h2>Create Your Account</h2>
+
+        <p class="subtitle">
+
+            Join the Vasavi Alumni Network
+
+        </p>
+
+        <form action="/signup"
+              method="POST"
+              enctype="multipart/form-data">
+
+            <label>Profile Picture (Optional)</label>
+
+            <div class="profile-upload">
+
+                <img
+
+                    src="{{ url_for('static', filename='profile_pics/default.png') }}"
+
+                    id="previewImage"
+
+                    class="profile-preview">
+
+                <label
+                    for="profilepic"
+                    class="upload-btn">
+
+                    Choose Photo
+
+                </label>
+
+                <input
+
+                    type="file"
+
+                    id="profilepic"
+
+                    name="profilepic"
+
+                    accept="image/*">
+
+            </div>
+
+            <label>Admission Number</label>
+
+            <input
+
+                type="text"
+
+                name="adminno"
+
+                placeholder="Enter Admission Number"
+
+                required>
+
+            <label>Full Name</label>
+
+            <input
+
+                type="text"
+
+                name="fullname"
+
+                placeholder="Enter Full Name"
+
+                required>
+
+            <label>Registered Email Address</label>
+
+            <input
+
+                type="email"
+
+                name="email"
+
+                placeholder="Enter College Email"
+
+                required>
+
+            <div class="row">
+
+                <div class="field">
+
+                    <label>Branch</label>
+
+                    <select name="branch" required>
+
+                        <option value="">Select</option>
+
+                        <option>CSE</option>
+
+                        <option>IT</option>
+
+                        <option>ECE</option>
+
+                        <option>EEE</option>
+
+                        <option>ME</option>
+
+                        <option>CIVIL</option>
+
+                    </select>
+
+                </div>
+
+                <div class="field">
+
+                    <label>Section</label>
+
+                    <select name="sec" required>
+
+                        <option value="">Select</option>
+
+                        <option>A</option>
+
+                        <option>B</option>
+
+                        <option>C</option>
+
+                        <option>D</option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+            <label>Registered Mobile Number</label>
+
+            <input
+
+                type="text"
+
+                name="regmbno"
+
+                placeholder="Enter Mobile Number"
+
+                required>
+
+            <label>Password</label>
+
+            <input
+
+                type="password"
+
+                name="pass"
+
+                placeholder="Enter Password"
+
+                required>
+
+            <label>Confirm Password</label>
+
+            <input
+
+                type="password"
+
+                name="confirmpass"
+
+                placeholder="Confirm Password"
+
+                required>
+
+            <div class="checkbox">
+
+                <input
+
+                    type="checkbox"
+
+                    id="terms"
+
+                    required>
+
+                <span>
+
+                    I agree to the Terms & Conditions
+
+                </span>
+
+            </div>
+
+            {% if message %}
+
+            <p class="MSG">
+
+                {{ message }}
+
+            </p>
+
+            {% endif %}
+
+            <input
+
+                type="submit"
+
+                value="VERIFY EMAIL"
+
+                id="signupbtn"
+
+                disabled>
+
+        </form>
+
+        <div class="login-link">
+
+            Already have an account?
+
+            <a href="/login">
+
+                Login
+
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+
+const checkbox = document.getElementById("terms");
+const button = document.getElementById("signupbtn");
+
+checkbox.addEventListener("change",function(){
+
+    button.disabled=!checkbox.checked;
+
+});
+
+const profileInput=document.getElementById("profilepic");
+const preview=document.getElementById("previewImage");
+
+profileInput.addEventListener("change",function(){
+
+    const file=this.files[0];
+
+    if(file){
+
+        preview.src=URL.createObjectURL(file);
+
+    }
+
+});
+
+</script>
+
+</body>
+
+</html>

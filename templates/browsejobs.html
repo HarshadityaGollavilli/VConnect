@@ -1,0 +1,110 @@
+{% extends 'basic.html' %}
+
+{% block head %}
+{{ super() }}
+<title>Browse Jobs | VConnect</title>
+
+<link rel="stylesheet"
+      href="{{ url_for('static', filename='browsejobs.css') }}">
+
+{% endblock %}
+
+{% block body %}
+
+<div class="browse-container">
+
+    <div class="page-header">
+
+        <h1>Browse Jobs</h1>
+
+        <p>
+            Explore opportunities shared by Vasavi alumni.
+        </p>
+
+    </div>
+
+    <form action="/browsejobs" method="GET" class="search-box">
+
+        <input
+            type="text"
+            name="search"
+            placeholder="Search by job title, company or skills..."
+            value="{{ request.args.get('search', '') }}">
+
+        <button type="submit">
+            Search
+        </button>
+
+    </form>
+
+    <div class="jobs-list">
+
+        {% for item in joblist %}
+
+        <div class="job-card">
+
+            <div class="card-top">
+
+                <div>
+
+                    <h2>{{ item['job'].jobtitle }}</h2>
+
+                    <h3>{{ item['job'].companyname }}</h3>
+
+                </div>
+
+            </div>
+
+            <div class="job-info">
+
+                <span>📍 {{ item['job'].location }}</span>
+
+                <span>💼 {{ item['job'].jobtype }}</span>
+
+                <span>💰 {{ item['job'].salary }}</span>
+
+            </div>
+
+            <div class="skills">
+
+                {% for skill in item['job'].skillsreq.split(',') %}
+
+                    <span class="skill-tag">
+                        {{ skill.strip() }}
+                    </span>
+
+                {% endfor %}
+
+            </div>
+
+            <div class="bottom">
+
+                <div>
+
+                    <small>Shared by Alumni</small>
+
+                    <p>{{ item['user'].name }}</p>
+
+                </div>
+
+                <div class="right">
+
+                    <small>{{ item['job'].dateposted }}</small>
+
+                    <a href="/viewdetails/{{ item['job'].jobid }}">
+                        View Details →
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,105 @@
+{% extends 'basic.html' %}
+
+{% block head %}
+{{ super() }}
+
+<title>Share an Opportunity | VConnect</title>
+
+<link rel="stylesheet" href="{{ url_for('static', filename='addjob.css') }}">
+
+{% endblock %}
+
+{% block body %}
+
+<div class="job-container">
+
+    <div class="job-card">
+
+        <h1>Share an Opportunity</h1>
+
+        <p class="subtitle">
+            Help Vasavi students and alumni discover their next career opportunity.
+        </p>
+
+        <form action="/addjob" method="POST">
+
+            <div class="input-group">
+                <label>Job Title</label>
+                <input type="text" name="jobtitle" required>
+            </div>
+
+            <div class="input-group">
+                <label>Company Name</label>
+                <input type="text" name="companyname" required>
+            </div>
+
+            <div class="row">
+
+                <div class="input-group">
+                    <label>Location</label>
+                    <input type="text" name="location" required>
+                </div>
+
+                <div class="input-group">
+                    <label>Job Type</label>
+
+                    <select name="jobtype">
+
+                        <option>Internship</option>
+                        <option>Full-Time</option>
+                        <option>Part-Time</option>
+                        <option>Remote</option>
+                        <option>Hybrid</option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+            <div class="row">
+
+                <div class="input-group">
+                    <label>Salary / Stipend</label>
+                    <input type="text" name="salary" placeholder="₹30,000/month or 15 LPA">
+                </div>
+
+                <div class="input-group">
+                    <label>Application Link</label>
+                    <input type="url" name="applicationlink">
+                </div>
+
+            </div>
+
+            <div class="input-group">
+
+                <label>Skills Required</label>
+
+                <input type="text"
+                       name="skillsreq"
+                       placeholder="Python, Flask, SQL, HTML, CSS">
+
+            </div>
+
+            <div class="input-group">
+
+                <label>Job Description</label>
+
+                <textarea
+                    name="description"
+                    rows="8"
+                    placeholder="Describe the role, eligibility, responsibilities, hiring process, etc."></textarea>
+
+            </div>
+
+            <button type="submit">
+                Post Job
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+{% endblock %}

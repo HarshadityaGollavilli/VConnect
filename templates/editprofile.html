@@ -1,0 +1,130 @@
+{% extends 'basic.html' %}
+
+{% block head %}
+{{ super() }}
+<title>Edit Profile | VConnect</title>
+
+<link rel="stylesheet"
+href="{{ url_for('static', filename='editprofile.css') }}">
+
+{% endblock %}
+
+{% block body %}
+
+<div class="container">
+
+    <div class="edit-card">
+
+        <h1>Edit Profile</h1>
+
+        <p class="subtitle">
+            Keep your profile updated so your juniors and alumni can know you better.
+        </p>
+
+        <form action="/editprofile" method="POST" enctype="multipart/form-data">
+
+            <!-- Profile Picture -->
+
+            <div class="form-group">
+
+                <label>Profile Picture</label>
+
+                <div class="profile-section">
+
+                    <img src="{{ url_for('static', filename='profile_pics/' + user.profile_pic) }}"
+                    class="profile-image">
+
+                    <input type="file" name="profilepic">
+
+                </div>
+
+            </div>
+
+            <!-- Bio -->
+
+            <div class="form-group">
+
+                <label>Bio</label>
+
+                <textarea
+                name="bio"
+                rows="5"
+                placeholder="Tell everyone about yourself...">{{ user.bio or ''}}</textarea>
+
+            </div>
+
+            <!-- LinkedIn -->
+
+            <div class="form-group">
+
+                <label>LinkedIn</label>
+
+                <input
+                type="url"
+                name="linkedin"
+                value="{{ user.linkedin or '' }}"
+                placeholder="https://linkedin.com/in/username">
+
+            </div>
+
+            <!-- GitHub -->
+
+            <div class="form-group">
+
+                <label>GitHub</label>
+
+                <input
+                type="url"
+                name="github"
+                value="{{ user.github or '' }}"
+                placeholder="https://github.com/username">
+
+            </div>
+
+            <!-- Portfolio -->
+
+            <div class="form-group">
+
+                <label>Portfolio</label>
+
+                <input
+                type="url"
+                name="portfolio"
+                value="{{ user.portfolio or '' }}"
+                placeholder="https://yourwebsite.com">
+
+            </div>
+
+            <!-- Skills -->
+
+            <div class="form-group">
+
+                <label>Skills</label>
+
+                <textarea
+                name="skills"
+                rows="4"
+                placeholder="Python, Flask, SQL, HTML, CSS...">{{ user.skills or '' }}</textarea>
+
+            </div>
+
+            <div class="buttons">
+
+                <a href="/profile" class="cancel-btn">
+                    Cancel
+                </a>
+
+                <input
+                type="submit"
+                value="Save Changes"
+                class="save-btn">
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+{% endblock %}

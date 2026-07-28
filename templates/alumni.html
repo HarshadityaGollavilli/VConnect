@@ -1,0 +1,99 @@
+{% extends 'basic.html' %}
+
+{% block head %}
+{{ super() }}
+
+<title>Alumni Directory | VConnect</title>
+
+<link rel="stylesheet"
+href="{{ url_for('static', filename='alumni.css') }}">
+
+{% endblock %}
+
+{% block body %}
+
+<div class="alumni-container">
+
+    <div class="page-header">
+
+        <h1>Alumni Directory</h1>
+
+        <p>
+            Discover and connect with students and alumni of
+            Vasavi College of Engineering.
+        </p>
+
+    </div>
+
+    <form action="/alumni" method="GET" class="search-box">
+
+        <input
+            type="text"
+            name="search"
+            placeholder="Search by Name, Branch or Admission Number">
+
+        <button type="submit">
+
+            Search
+
+        </button>
+
+    </form>
+
+    <div class="count">
+
+        <h3>
+
+            {{ alumnidetails | length }} Alumni Found
+
+        </h3>
+
+    </div>
+
+    <div class="alumni-grid">
+
+        {% for user in alumnidetails %}
+
+        <div class="alumni-card">
+
+            <img
+            src="{{ url_for('static', filename='profile_pics/' + user.profile_pic) }}"
+            class="profile-pic">
+
+            <h2>{{ user.name }}</h2>
+
+            <p>
+
+                {{ user.branch }} • Section {{ user.section }}
+
+            </p>
+
+            <a
+            href="/alumni/{{ user.id }}"
+            class="view-btn">
+
+                View Profile
+
+            </a>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+    {% if alumnidetails|length==0 %}
+
+    <div class="empty">
+
+        <h2></h2>
+
+        <p>No alumni found.</p>
+
+    </div>
+
+    {% endif %}
+
+</div>
+
+{% endblock %}

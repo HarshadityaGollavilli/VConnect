@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Email Verification | VConnect</title>
+
+    <link rel="icon"
+          href="{{ url_for('static', filename='profile_pics/vconnectlogo.jpeg') }}">
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='verifyotp.css') }}">
+
+</head>
+
+<body>
+
+<header>
+
+    <div class="logo">
+
+        <img src="{{ url_for('static', filename='profile_pics/vconnectlogo.jpeg') }}">
+
+        <h1>CONNECT</h1>
+
+    </div>
+
+    <nav>
+
+        <a href="/">Home</a>
+
+        <a href="/#about">About</a>
+
+        <a href="/#contact">Contact</a>
+
+    </nav>
+
+</header>
+
+<div class="container">
+
+    <div class="verify-box">
+
+        <img
+            src="{{ url_for('static', filename='profile_pics/vconnectlogo.jpeg') }}"
+            class="verify-logo">
+
+        <h2>Email Verification</h2>
+
+        <p class="info">
+
+            We've sent a six-digit verification code to your registered email address.
+
+        </p>
+
+        <form action="/verifyotp" method="POST">
+
+            <label>Enter OTP</label>
+
+            <div class="otp-container">
+
+                <input type="text" maxlength="1" class="otp-box">
+
+                <input type="text" maxlength="1" class="otp-box">
+
+                <input type="text" maxlength="1" class="otp-box">
+
+                <input type="text" maxlength="1" class="otp-box">
+
+                <input type="text" maxlength="1" class="otp-box">
+
+                <input type="text" maxlength="1" class="otp-box">
+
+            </div>
+
+            <input
+                type="hidden"
+                name="otp"
+                id="finalOtp">
+
+            {% if message %}
+
+            <p class="msg">
+
+                {{ message }}
+
+            </p>
+
+            {% endif %}
+
+            <input
+
+                type="submit"
+
+                value="VERIFY OTP">
+
+        </form>
+
+        <div class="resend">
+
+            Didn't receive the code?
+
+            <a href="/verifyotp">
+
+                Resend OTP
+
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+
+const otpBoxes=document.querySelectorAll(".otp-box");
+
+const hiddenOtp=document.getElementById("finalOtp");
+
+otpBoxes.forEach((box,index)=>{
+
+box.addEventListener("input",function(){
+
+this.value=this.value.replace(/[^0-9]/g,'');
+
+if(this.value && index<otpBoxes.length-1){
+
+otpBoxes[index+1].focus();
+
+}
+
+hiddenOtp.value=[...otpBoxes].map(box=>box.value).join("");
+
+});
+
+box.addEventListener("keydown",function(e){
+
+if(e.key==="Backspace" && this.value==="" && index>0){
+
+otpBoxes[index-1].focus();
+
+}
+
+});
+
+});
+
+</script>
+
+</body>
+
+</html>

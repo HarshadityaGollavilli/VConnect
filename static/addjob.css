@@ -1,0 +1,129 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Poppins,sans-serif;
+}
+
+body{
+    background:#f5f7fb;
+}
+
+/* ================= CONTAINER ================= */
+
+.job-container{
+
+    width:100%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:50px 20px;
+
+}
+
+/* ================= CARD ================= */
+
+.job-card{
+
+    width:900px;
+    background:white;
+    padding:45px;
+    border-radius:20px;
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+
+}
+
+.job-card h1{
+
+    color:#da4545;
+    margin-bottom:10px;
+    text-align:center;
+
+}
+
+.subtitle{
+
+    text-align:center;
+    color:#666;
+    margin-bottom:40px;
+    line-height:1.7;
+
+}
+
+/* ================= FORM ================= */
+
+.input-group{
+
+    display:flex;
+    flex-direction:column;
+    margin-bottom:22px;
+
+}
+
+.input-group label{
+
+    margin-bottom:8px;
+    font-weight:600;
+    color:#444;
+
+}
+
+.input-group input,
+.input-group select,
+.input-group textarea{
+
+    padding:14px;
+    border:1px solid #d6d6d6;
+    border-radius:10px;
+    font-size:15px;
+    outline:none;
+    transition:.3s;
+
+}
+
+.input-group input:focus,
+.input-group select:focus,
+.input-group textarea:focus{
+
+    border-color:#da4545;
+
+}
+
+textarea{
+
+    resize:vertical;
+
+}
+
+/* ================= TWO COLUMN ================= */
+
+.row{
+
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:20px;
+
+}
+
+/* ================= BUTTON ================= */
+
+button{
+
+    width:100%;
+    padding:16px;
+    border:none;
+    border-radius:10px;
+    background:#da4545;
+    color:white;
+    font-size:17px;
+    font-weight:600;
+    cursor:pointer;
+    transition:.3s;
+
+}
+
+button:hover{
+
+    background:#c63a3a;
+
+}
