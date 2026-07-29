@@ -116,6 +116,11 @@ def login():
                 return redirect('/dashboard')
             else:
                 return render_template('login.html',message='Invalid Credentials. Please Try Again')
+        else:
+            return render_template(
+                'login.html',
+                message='Invalid Admission Number or Mobile Number'
+            )
     return render_template("login.html")
 
 @app.route('/')
