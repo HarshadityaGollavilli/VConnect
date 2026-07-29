@@ -202,7 +202,7 @@ def signupuser():
                 print("Sending OTP to:", tomail)
                 print("My verified email:", "harshadityag@gmail.com")
                 resend.Emails.send({
-                    "from": "VConnect <noreplyvalumnivibe.com>",
+                    "from": "noreply@valumnivibe.com",
                     "to": [tomail],
                     "subject": "OTP Verification - VConnect",
                     "text": f"""
@@ -524,7 +524,6 @@ def viewalumniprofile(alumniuserid):
         return redirect('/alumni')
     alumnijobdata = JobData.query.filter_by(userid=alumniuserid).order_by(JobData.dateposted.desc()).all()
     return render_template('viewalumniprofile.html',alumniuserprofile=alumniuserprofile,alumnijobdata=alumnijobdata)
-
 
 
 
