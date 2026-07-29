@@ -202,7 +202,7 @@ def signupuser():
                 print("Sending OTP to:", tomail)
                 print("My verified email:", "harshadityag@gmail.com")
                 resend.Emails.send({
-                    "from": "VConnect <onboarding@resend.dev>",
+                    "from": "VConnect <noreplyvalumnivibe.com>",
                     "to": [tomail],
                     "subject": "OTP Verification - VConnect",
                     "text": f"""
