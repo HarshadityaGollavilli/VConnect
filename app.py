@@ -515,7 +515,7 @@ def alumni():
     return render_template('alumni.html',alumnidetails=alumnidetails)
 
 
-@app.route('/viewalumniprofile/<int:alumniuserid>')
+@app.route('/viewprofile/<int:alumniuserid>')
 def viewalumniprofile(alumniuserid):
     if 'userid' not in session:
         return redirect('/')
@@ -523,7 +523,7 @@ def viewalumniprofile(alumniuserid):
     if not alumniuserprofile:
         return redirect('/alumni')
     alumnijobdata = JobData.query.filter_by(userid=alumniuserid).order_by(JobData.dateposted.desc()).all()
-    return render_template('viewalumniprofile.html',alumniuserprofile=alumniuserprofile,alumnijobdata=alumnijobdata)
+    return render_template('viewprofile.html',alumniuserprofile=alumniuserprofile,alumnijobdata=alumnijobdata)
 
 
 

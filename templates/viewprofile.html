@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>{{ user.full_name }} | ValumniVibe</title>
+<link rel="stylesheet" href="{{ url_for('static',filename='viewprofile.css') }}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+<nav class="navbar">
+<div class="logo">ValumniVibe</div>
+<ul>
+<li><a href="/">Home</a></li>
+<li><a href="/alumni">Alumni</a></li>
+<li><a href="/dashboard">Dashboard</a></li>
+</ul>
+</nav>
+
+<header class="hero">
+<div class="overlay"></div>
+<div class="profile">
+<img src="{{ url_for('static',filename='profile_pics/' + user.profile_pic) }}" class="avatar">
+<div class="info">
+<h1>{{ user.full_name }}</h1>
+<h3>{{ user.current_position }}</h3>
+<p>{{ user.company }} • {{ user.location }}</p>
+<div class="buttons">
+<button>Connect</button>
+<button class="secondary">Message</button>
+</div>
+</div>
+</div>
+</header>
+
+<main class="container">
+<section class="card">
+<h2>About</h2>
+<p>{{ user.about }}</p>
+</section>
+
+<div class="grid">
+<section class="card">
+<h2>Personal Information</h2>
+<table>
+<tr><td>Admission</td><td>{{ user.admission_number }}</td></tr>
+<tr><td>Branch</td><td>{{ user.branch }}</td></tr>
+<tr><td>Section</td><td>{{ user.section }}</td></tr>
+<tr><td>Graduation</td><td>{{ user.graduation_year }}</td></tr>
+<tr><td>Email</td><td>{{ user.email }}</td></tr>
+</table>
+</section>
+
+<section class="card">
+<h2>Professional</h2>
+<table>
+<tr><td>Company</td><td>{{ user.company }}</td></tr>
+<tr><td>Role</td><td>{{ user.current_position }}</td></tr>
+<tr><td>Experience</td><td>{{ user.experience }}</td></tr>
+<tr><td>Industry</td><td>{{ user.industry }}</td></tr>
+</table>
+</section>
+</div>
+
+<section class="card">
+<h2>Education</h2>
+<div class="timeline">
+<div class="item">
+<h4>Vasavi College of Engineering</h4>
+<p>{{ user.branch }} • {{ user.graduation_year }}</p>
+</div>
+</div>
+</section>
+
+<section class="card">
+<h2>Skills</h2>
+<div class="chips">
+{% for skill in user.skills %}
+<span>{{ skill }}</span>
+{% endfor %}
+</div>
+</section>
+
+<section class="card">
+<h2>Achievements</h2>
+<ul>
+{% for achievement in user.achievements %}
+<li>{{ achievement }}</li>
+{% endfor %}
+</ul>
+</section>
+
+<section class="card">
+<h2>Social Links</h2>
+<div class="social">
+<a href="{{ user.linkedin }}"><i class="fab fa-linkedin"></i></a>
+<a href="{{ user.github }}"><i class="fab fa-github"></i></a>
+<a href="{{ user.portfolio }}"><i class="fas fa-globe"></i></a>
+</div>
+</section>
+
+<a class="back" href="/alumni">← Back to Alumni</a>
+</main>
+</body>
+</html>
