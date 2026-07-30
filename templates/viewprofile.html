@@ -1,106 +1,643 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>{{ user.full_name }} | ValumniVibe</title>
-<link rel="stylesheet" href="{{ url_for('static',filename='viewprofile.css') }}">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>
+
+        {{ alumniuserprofile.name }} | ValumniVibe
+
+    </title>
+
+    <link rel="stylesheet"
+        href="{{ url_for('static',filename='viewprofile.css') }}">
+
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
 </head>
+
 <body>
+
+
+
+<!-- ================================= -->
+
+<!-- NAVBAR -->
+
+<!-- ================================= -->
+
 <nav class="navbar">
-<div class="logo">ValumniVibe</div>
-<ul>
-<li><a href="/">Home</a></li>
-<li><a href="/alumni">Alumni</a></li>
-<li><a href="/dashboard">Dashboard</a></li>
-</ul>
+
+    <div class="logo">
+
+        <img src="{{ url_for('static',
+        filename='profile_pics/vconnectlogo.jpeg') }}">
+
+        <h2>
+
+            ValumniVibe
+
+        </h2>
+
+    </div>
+
+    <ul>
+
+        <li>
+
+            <a href="/">
+
+                Home
+
+            </a>
+
+        </li>
+
+        <li>
+
+            <a href="/alumni">
+
+                Alumni
+
+            </a>
+
+        </li>
+
+        <li>
+
+            <a href="/dashboard">
+
+                Dashboard
+
+            </a>
+
+        </li>
+
+    </ul>
+
 </nav>
 
-<header class="hero">
-<div class="overlay"></div>
-<div class="profile">
-<img src="{{ url_for('static',filename='profile_pics/' + user.profile_pic) }}" class="avatar">
-<div class="info">
-<h1>{{ user.full_name }}</h1>
-<h3>{{ user.current_position }}</h3>
-<p>{{ user.company }} • {{ user.location }}</p>
-<div class="buttons">
-<button>Connect</button>
-<button class="secondary">Message</button>
-</div>
-</div>
-</div>
-</header>
 
-<main class="container">
-<section class="card">
-<h2>About</h2>
-<p>{{ user.about }}</p>
+
+<!-- ================================= -->
+
+<!-- HERO -->
+
+<!-- ================================= -->
+
+<section class="hero">
+
+    <div class="hero-overlay"></div>
+
+    <div class="cover-image">
+
+    </div>
+
+
+
+    <div class="profile-card">
+
+        <div class="profile-image">
+
+            <img
+
+                src="{{ url_for('static',
+                filename='profile_pics/' + alumniuserprofile.profile_pic) }}">
+
+        </div>
+
+
+
+        <div class="profile-content">
+
+            <h1>
+
+                {{ alumniuserprofile.name }}
+
+            </h1>
+
+
+
+            <h3>
+
+                {{ alumniuserprofile.branch }}
+
+            </h3>
+
+
+
+            <p>
+
+                Admission Number :
+
+                {{ alumniuserprofile.admission_number }}
+
+            </p>
+
+
+
+            <p>
+
+                Section :
+
+                {{ alumniuserprofile.section }}
+
+            </p>
+
+
+
+            <div class="profile-buttons">
+
+                <button class="connect-btn">
+
+                    <i class="fa-solid fa-user-plus"></i>
+
+                    Connect
+
+                </button>
+
+
+
+                <button class="message-btn">
+
+                    <i class="fa-solid fa-paper-plane"></i>
+
+                    Message
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
 </section>
 
-<div class="grid">
-<section class="card">
-<h2>Personal Information</h2>
-<table>
-<tr><td>Admission</td><td>{{ user.admission_number }}</td></tr>
-<tr><td>Branch</td><td>{{ user.branch }}</td></tr>
-<tr><td>Section</td><td>{{ user.section }}</td></tr>
-<tr><td>Graduation</td><td>{{ user.graduation_year }}</td></tr>
-<tr><td>Email</td><td>{{ user.email }}</td></tr>
-</table>
-</section>
+
+
+<!-- ================================= -->
+
+<!-- MAIN CONTAINER -->
+
+<!-- ================================= -->
+
+<div class="container">
+
+
+
+<!-- ================================= -->
+
+<!-- ABOUT -->
+
+<!-- ================================= -->
 
 <section class="card">
-<h2>Professional</h2>
-<table>
-<tr><td>Company</td><td>{{ user.company }}</td></tr>
-<tr><td>Role</td><td>{{ user.current_position }}</td></tr>
-<tr><td>Experience</td><td>{{ user.experience }}</td></tr>
-<tr><td>Industry</td><td>{{ user.industry }}</td></tr>
-</table>
+
+    <div class="heading">
+
+        <i class="fa-solid fa-user"></i>
+
+        <h2>
+
+            About
+
+        </h2>
+
+    </div>
+
+
+
+    {% if alumniuserprofile.bio %}
+
+    <p>
+
+        {{ alumniuserprofile.bio }}
+
+    </p>
+
+    {% else %}
+
+    <p>
+
+        This alumnus has not added a bio yet.
+
+    </p>
+
+    {% endif %}
+
 </section>
+
+<!-- ================================= -->
+
+<!-- PERSONAL INFORMATION -->
+
+<!-- ================================= -->
+
+<section class="card">
+
+    <div class="heading">
+
+        <i class="fa-solid fa-address-card"></i>
+
+        <h2>
+
+            Personal Information
+
+        </h2>
+
+    </div>
+
+    <div class="info-grid">
+
+        <div class="info-box">
+
+            <span>Admission Number</span>
+
+            <p>
+
+                {{ alumniuserprofile.admission_number }}
+
+            </p>
+
+        </div>
+
+        <div class="info-box">
+
+            <span>Branch</span>
+
+            <p>
+
+                {{ alumniuserprofile.branch }}
+
+            </p>
+
+        </div>
+
+        <div class="info-box">
+
+            <span>Section</span>
+
+            <p>
+
+                {{ alumniuserprofile.section }}
+
+            </p>
+
+        </div>
+
+        <div class="info-box">
+
+            <span>Email</span>
+
+            <p>
+
+                {{ alumniuserprofile.email }}
+
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ================================= -->
+
+<!-- SKILLS -->
+
+<!-- ================================= -->
+
+<section class="card">
+
+    <div class="heading">
+
+        <i class="fa-solid fa-laptop-code"></i>
+
+        <h2>
+
+            Skills
+
+        </h2>
+
+    </div>
+
+    {% if alumniuserprofile.skills %}
+
+    <div class="skill-container">
+    {% if alumniuserprofile.skills %}
+        {% for skill in alumniuserprofile.skills.split(',') %}
+
+            <span class="skill-chip">
+
+                {{ skill.strip() }}
+
+            </span>
+
+        {% endfor %}
+    {% endif %}
+
+    </div>
+
+    {% else %}
+
+    <p>
+
+        No skills added yet.
+
+    </p>
+
+    {% endif %}
+
+</section>
+
+
+
+<!-- ================================= -->
+
+<!-- SOCIAL LINKS -->
+
+<!-- ================================= -->
+
+<section class="card">
+
+    <div class="heading">
+
+        <i class="fa-solid fa-link"></i>
+
+        <h2>
+
+            Connect
+
+        </h2>
+
+    </div>
+
+    <div class="social-links">
+
+        {% if alumniuserprofile.linkedin %}
+
+        <a
+
+        href="{{ alumniuserprofile.linkedin }}"
+
+        target="_blank">
+
+            <i class="fab fa-linkedin"></i>
+
+            LinkedIn
+
+        </a>
+
+        {% endif %}
+
+
+
+        {% if alumniuserprofile.github %}
+
+        <a
+
+        href="{{ alumniuserprofile.github }}"
+
+        target="_blank">
+
+            <i class="fab fa-github"></i>
+
+            GitHub
+
+        </a>
+
+        {% endif %}
+
+
+
+        {% if alumniuserprofile.portfolio %}
+
+        <a
+
+        href="{{ alumniuserprofile.portfolio }}"
+
+        target="_blank">
+
+            <i class="fa-solid fa-globe"></i>
+
+            Portfolio
+
+        </a>
+
+        {% endif %}
+
+    </div>
+
+</section>
+
+<!-- ================================= -->
+
+<!-- LATEST OPPORTUNITIES -->
+
+<!-- ================================= -->
+
+<section class="card">
+
+    <div class="heading">
+
+        <i class="fa-solid fa-briefcase"></i>
+
+        <h2>
+
+            Latest Opportunities
+
+        </h2>
+
+    </div>
+
+    {% if alumnijobdata %}
+
+        {% for job in alumnijobdata %}
+
+        <div class="job-card">
+
+            <div class="job-header">
+
+                <div>
+
+                    <h3>
+
+                        {{ job.jobtitle }}
+
+                    </h3>
+
+                    <h4>
+
+                        {{ job.companyname }}
+
+                    </h4>
+
+                </div>
+
+                <span class="job-type">
+
+                    {{ job.jobtype }}
+
+                </span>
+
+            </div>
+
+
+
+            <div class="job-details">
+
+                <p>
+
+                    <i class="fa-solid fa-location-dot"></i>
+
+                    {{ job.location }}
+
+                </p>
+
+                <p>
+
+                    <i class="fa-solid fa-money-bill-wave"></i>
+
+                    {{ job.salary }}
+
+                </p>
+
+                <p>
+
+                    <i class="fa-solid fa-calendar"></i>
+
+                    {{ job.dateposted.strftime('%d %b %Y') }}
+
+                </p>
+
+            </div>
+
+
+
+            <div class="job-description">
+
+                <h4>
+
+                    Description
+
+                </h4>
+
+                <p>
+
+                    {{ job.description }}
+
+                </p>
+
+            </div>
+
+
+
+            <div class="job-skills">
+
+                <h4>
+
+                    Required Skills
+
+                </h4>
+
+                <p>
+
+                    {{ job.skillsreq }}
+
+                </p>
+
+            </div>
+
+
+
+            <div class="apply-btn">
+
+                <a href="{{ job.applicationlink }}"
+
+                   target="_blank">
+
+                    Apply Now
+
+                </a>
+
+            </div>
+
+        </div>
+
+        {% endfor %}
+
+    {% else %}
+
+        <div class="empty-card">
+
+            <i class="fa-solid fa-folder-open"></i>
+
+            <h3>
+
+                No Opportunities Posted Yet
+
+            </h3>
+
+            <p>
+
+                This alumni hasn't posted any job opportunities.
+
+            </p>
+
+        </div>
+
+    {% endif %}
+
+</section>
+
+
+
+<!-- ================================= -->
+
+<!-- BACK BUTTON -->
+
+<!-- ================================= -->
+
+<div class="back-section">
+
+    <a href="/alumni" class="back-btn">
+
+        <i class="fa-solid fa-arrow-left"></i>
+
+        Back to Alumni
+
+    </a>
+
 </div>
 
-<section class="card">
-<h2>Education</h2>
-<div class="timeline">
-<div class="item">
-<h4>Vasavi College of Engineering</h4>
-<p>{{ user.branch }} • {{ user.graduation_year }}</p>
-</div>
-</div>
-</section>
 
-<section class="card">
-<h2>Skills</h2>
-<div class="chips">
-{% for skill in user.skills %}
-<span>{{ skill }}</span>
-{% endfor %}
+
 </div>
-</section>
 
-<section class="card">
-<h2>Achievements</h2>
-<ul>
-{% for achievement in user.achievements %}
-<li>{{ achievement }}</li>
-{% endfor %}
-</ul>
-</section>
 
-<section class="card">
-<h2>Social Links</h2>
-<div class="social">
-<a href="{{ user.linkedin }}"><i class="fab fa-linkedin"></i></a>
-<a href="{{ user.github }}"><i class="fab fa-github"></i></a>
-<a href="{{ user.portfolio }}"><i class="fas fa-globe"></i></a>
-</div>
-</section>
 
-<a class="back" href="/alumni">← Back to Alumni</a>
-</main>
+<footer>
+
+    <p>
+
+        © 2026 ValumniVibe | Connecting Alumni Forever ❤️
+
+    </p>
+
+</footer>
+
 </body>
+
 </html>
