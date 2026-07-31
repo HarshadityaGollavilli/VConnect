@@ -75,7 +75,7 @@ a{
 
 .logo h2{
 
-    color:#6C2BD9;
+    color:#2563EB;
 
 }
 
@@ -101,7 +101,7 @@ a{
 
 .navbar ul li a:hover{
 
-    color:#6C2BD9;
+    color:#2563EB;
 
 }
 
@@ -127,7 +127,7 @@ a{
 
     height:230px;
 
-    background:linear-gradient(135deg,#6C2BD9,#8B5CF6);
+    background:linear-gradient(135deg,#2563EB,#8B5CF6);
 
 }
 
@@ -207,7 +207,7 @@ a{
 
 .profile-content h3{
 
-    color:#6C2BD9;
+    color:#2563EB;
 
     margin-bottom:12px;
 
@@ -233,7 +233,7 @@ a{
 
 .connect-btn{
 
-    background:#6C2BD9;
+    background:#2563EB;
 
     color:white;
 
@@ -253,7 +253,7 @@ a{
 
 .connect-btn:hover{
 
-    background:#5521b5;
+    background:#2563EB;
 
 }
 
@@ -261,9 +261,9 @@ a{
 
     background:white;
 
-    border:2px solid #6C2BD9;
+    border:2px solid #2563EB;
 
-    color:#6C2BD9;
+    color:#2563EB;
 
     padding:13px 28px;
 
@@ -277,7 +277,7 @@ a{
 
 .message-btn:hover{
 
-    background:#6C2BD9;
+    background:#2563EB;
 
     color:white;
 
@@ -323,7 +323,7 @@ a{
 
 .heading i{
 
-    color:#6C2BD9;
+    color:#2563EB;
 
     font-size:22px;
 
@@ -354,7 +354,7 @@ a{
 
     background:#f8f8ff;
 
-    border-left:5px solid #6C2BD9;
+    border-left:5px solid #2563EB;
 
     border-radius:12px;
 
@@ -412,7 +412,7 @@ a{
 
 .skill-chip{
 
-    background:#6C2BD9;
+    background:#2563EB;
 
     color:white;
 
@@ -428,7 +428,7 @@ a{
 
 .skill-chip:hover{
 
-    background:#5521b5;
+    background:#2563EB;
 
     transform:scale(1.05);
 
@@ -454,9 +454,9 @@ a{
 
     background:white;
 
-    border:2px solid #6C2BD9;
+    border:2px solid #2563EB;
 
-    color:#6C2BD9;
+    color:#2563EB;
 
     padding:15px 22px;
 
@@ -470,7 +470,7 @@ a{
 
 .social-links a:hover{
 
-    background:#6C2BD9;
+    background:#2563EB;
 
     color:white;
 
@@ -526,7 +526,7 @@ a{
 
 .job-header h3{
 
-    color:#6C2BD9;
+    color:#2563EB;
 
     font-size:24px;
 
@@ -542,7 +542,7 @@ a{
 
 .job-type{
 
-    background:#6C2BD9;
+    background:#2563EB;
 
     color:white;
 
@@ -574,7 +574,7 @@ a{
 
 .job-details i{
 
-    color:#6C2BD9;
+    color:#2563EB;
 
     margin-right:6px;
 
@@ -614,7 +614,7 @@ a{
 
 .apply-btn a{
 
-    background:#6C2BD9;
+    background:#2563EB;
 
     color:white;
 
@@ -628,7 +628,7 @@ a{
 
 .apply-btn a:hover{
 
-    background:#5521b5;
+    background:#2563EB;
 
 }
 
@@ -650,7 +650,7 @@ a{
 
     font-size:60px;
 
-    color:#6C2BD9;
+    color:#2563EB;
 
     margin-bottom:20px;
 
@@ -680,7 +680,7 @@ a{
 
     display:inline-block;
 
-    background:#6C2BD9;
+    background:#2563EB;
 
     color:white;
 
@@ -694,7 +694,7 @@ a{
 
 .back-btn:hover{
 
-    background:#5521b5;
+    background:#2563EB;
 
 }
 
