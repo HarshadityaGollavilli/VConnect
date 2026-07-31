@@ -12,6 +12,30 @@ href="{{ url_for('static', filename='alumni.css') }}">
 
 {% block body %}
 
+<script>
+
+const filterBtn=document.getElementById("filterToggle");
+
+const panel=document.getElementById("filterPanel");
+
+filterBtn.onclick=function(){
+
+    if(panel.style.display=="block"){
+
+        panel.style.display="none";
+
+    }
+
+    else{
+
+        panel.style.display="block";
+
+    }
+
+}
+
+</script>
+
 <div class="alumni-container">
 
     <div class="page-header">
@@ -27,18 +51,107 @@ href="{{ url_for('static', filename='alumni.css') }}">
 
     <form action="/alumni" method="GET" class="search-box">
 
-        <input
-            type="text"
-            name="search"
-            placeholder="Search by Name, Branch or Admission Number">
+    <input
+        type="text"
+        name="search"
+        placeholder="Search by Name or Admission Number..."
+        value="{{ request.args.get('search','') }}">
 
-        <button type="submit">
+    <button type="submit">
 
-            Search
+        <i class="fa-solid fa-magnifying-glass"></i>
+
+    </button>
+
+    <button
+        type="button"
+        id="filterToggle"
+        class="filter-button">
+
+        <i class="fa-solid fa-filter"></i>
+
+        Filters
+
+    </button>
+
+</form>
+
+<div class="filter-panel" id="filterPanel">
+
+    <form action="/alumni" method="GET">
+
+        <div class="filter-grid">
+
+            <div>
+                <input
+type="hidden"
+name="search"
+value="{{ request.args.get('search','') }}">
+
+                <label>Branch</label>
+
+                <select name="branch">
+
+                    <option value="">All</option>
+
+                    <option value="CSE">CSE</option>
+
+                    <option value="AIML">AIML</option>
+
+                    <option value="ECE">ECE</option>
+
+                    <option value="EEE">EEE</option>
+
+                    <option value="MECH">MECH</option>
+
+                    <option value="CIVIL">CIVIL</option>
+
+                </select>
+
+            </div>
+
+            <div>
+
+                <label>Section</label>
+
+                <select name="section">
+
+                    <option value="">All</option>
+
+                    <option>A</option>
+
+                    <option>B</option>
+
+                    <option>C</option>
+
+                    <option>D</option>
+
+                </select>
+
+            </div>
+
+            <div>
+
+                <label>Skill</label>
+
+                <input
+                    type="text"
+                    name="skill"
+                    placeholder="Python, Java, Flask...">
+
+            </div>
+
+        </div>
+
+        <button class="apply-filter">
+
+            Apply Filters
 
         </button>
 
     </form>
+
+</div>
 
     <div class="count">
 
