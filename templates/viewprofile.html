@@ -157,13 +157,19 @@
 
             <div class="profile-buttons">
 
-                <button class="connect-btn">
+                <a href="/connect" class="connect-btn">
 
                     <i class="fa-solid fa-user-plus"></i>
 
-                    Connect
+                    {% if connectionstatus=="pending" %}
+                        Requested
+                    {% elif connectionstatus=="accepted" %}
+                        Connected
+                    {% elif connectionstatus=="rejected" %}
+                        Connect
+                    {% endif %}
 
-                </button>
+                </a>
 
 
 

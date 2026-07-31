@@ -1,4 +1,4 @@
-from flask import Flask,request,redirect,render_template,session
+from flask import Flask,request,redirect,render_template,session,url_for
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import or_
 import smtplib
@@ -93,6 +93,16 @@ class JobData(db.Model):
     def __repr__(self):
         return f"{self.jobid}"
 
+class Connection(db.Model):
+    id = db.Column(db.Integer,primary_key=True)
+    sender_id = db.Column(db.Integer,nullable=False)
+    receiver_id = db.Column(db.Integer,nullable=False)
+    status = db.Column(db.Text,nullable=False)
+    requested_at = db.Column(db.DateTime)
+    responded_at = db.Column(db.DateTime)
+
+    def __repr__(self):
+        return f"{self.sender_id}"
 @app.route('/login',methods=['POST','GET'])
 def login():
     if request.method=='POST':
@@ -535,11 +545,26 @@ def viewalumniprofile(alumniuserid):
     alumniuserprofile = User.query.filter_by(id = alumniuserid).first()
     if not alumniuserprofile:
         return redirect('/alumni')
+    connectiondetails = Connection.query.filter_by(sender_id=session.get('userid'),receiver_id=alumniuserid).first()
+    if connectiondetails.status:
+        connectionstatus = connectiondetails.status
     alumnijobdata = JobData.query.filter_by(userid=alumniuserid).order_by(JobData.dateposted.desc()).all()
-    return render_template('viewprofile.html',alumniuserprofile=alumniuserprofile,alumnijobdata=alumnijobdata)
+    return render_template('viewprofile.html',alumniuserprofile=alumniuserprofile,alumnijobdata=alumnijobdata,connectionstatus=connectionstatus)
 
 
-
+@app.route('/connectusers/<int:receiver_id>')
+def connectusers(receiver_id):
+    #Insert into table connections
+    insert_connection = Connection(
+        sender_id = session.get('userid'),
+        receiver_id = receiver_id,
+        status = "pending",
+        requested_at = datetime.datetime.now()
+    )
+    db.session.add(insert_connection)
+    db.session.commit()
+    session['receiver_id'] = receiver_id
+    return redirect(f"/viewprofile/{receiver_id}")
 
 
 if __name__ == "__main__":
