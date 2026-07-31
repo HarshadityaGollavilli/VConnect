@@ -236,3 +236,214 @@ body{
     margin-top:15px;
 
 }
+/* ===================================== */
+/* SEARCH SECTION */
+/* ===================================== */
+
+.search-section{
+
+    width:90%;
+
+    max-width:1200px;
+
+    margin:40px auto;
+
+    background:white;
+
+    padding:35px;
+
+    border-radius:18px;
+
+    box-shadow:0px 10px 30px rgba(0,0,0,.08);
+
+}
+
+.search-section h2{
+
+    color:#6C2BD9;
+
+    margin-bottom:8px;
+
+}
+
+.search-section p{
+
+    color:#666;
+
+    margin-bottom:25px;
+
+}
+
+.search-bar{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+}
+
+.search-bar input{
+
+    flex:1;
+
+    height:55px;
+
+    border:none;
+
+    outline:none;
+
+    background:#f4f4f4;
+
+    padding:0px 20px;
+
+    border-radius:12px;
+
+    font-size:16px;
+
+}
+
+.search-bar button{
+
+    width:55px;
+
+    height:55px;
+
+    border:none;
+
+    background:#6C2BD9;
+
+    color:white;
+
+    border-radius:12px;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+.search-bar button:hover{
+
+    background:#5521b5;
+
+}
+
+.filter-btn-container{
+
+    margin-top:20px;
+
+}
+
+.filter-btn-container button{
+
+    border:none;
+
+    background:#6C2BD9;
+
+    color:white;
+
+    padding:12px 25px;
+
+    border-radius:30px;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+.filter-btn-container button:hover{
+
+    background:#5521b5;
+
+}
+
+/* ===================================== */
+
+.filters{
+
+    margin-top:30px;
+
+    display:grid;
+
+    grid-template-columns:repeat(4,1fr);
+
+    gap:20px;
+
+}
+
+.filter-box{
+
+    display:flex;
+
+    flex-direction:column;
+
+}
+
+.filter-box label{
+
+    margin-bottom:8px;
+
+    font-weight:600;
+
+    color:#555;
+
+}
+
+.filter-box select,
+
+.filter-box input{
+
+    height:50px;
+
+    border:none;
+
+    outline:none;
+
+    background:#f4f4f4;
+
+    border-radius:10px;
+
+    padding:0px 15px;
+
+}
+
+.apply-btn{
+
+    align-self:end;
+
+    height:50px;
+
+    border:none;
+
+    background:#6C2BD9;
+
+    color:white;
+
+    border-radius:12px;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+.apply-btn:hover{
+
+    background:#5521b5;
+
+}
+
+/* ===================================== */
+
+@media(max-width:900px){
+
+    .filters{
+
+        grid-template-columns:1fr;
+
+    }
+
+}

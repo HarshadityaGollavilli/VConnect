@@ -500,18 +500,31 @@ def jobdetails(jobid):
 def alumni():
     if 'userid' not in session:
         return redirect('/')
-    searchalumni = request.args.get('search')
+    searchalumni = request.args.get('search', '').strip()
+    branch = request.args.get('branch', '')
+    section = request.args.get('section', '')
+    skill = request.args.get('skill', '').strip()
+
+    query = User.query.filter(User.id != session['userid'])
+
     if searchalumni:
-        alumnidetails = User.query.filter(
-            User.id!=session['userid'],
+        query = query.filter(
             or_(
                 User.admission_number.ilike(f"%{searchalumni}%"),
-                User.name.ilike(f"%{searchalumni}%"),
-                User.branch.ilike(f"%{searchalumni}%")
+                User.name.ilike(f"%{searchalumni}%")
             )
-        ).order_by(User.id.asc()).all()
-    else:
-        alumnidetails = User.query.filter(User.id!=session['userid']).order_by(User.id.asc()).all()
+        )
+
+    if branch:
+        query = query.filter(User.branch == branch)
+
+    if section:
+        query = query.filter(User.section == section)
+
+    if skill:
+        query = query.filter(User.skills.ilike(f"%{skill}%"))
+
+    alumnidetails = query.order_by(User.id.asc()).all()
     return render_template('alumni.html',alumnidetails=alumnidetails)
 
 
