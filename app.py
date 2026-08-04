@@ -545,6 +545,7 @@ def viewalumniprofile(alumniuserid):
     alumniuserprofile = User.query.filter_by(id = alumniuserid).first()
     if not alumniuserprofile:
         return redirect('/alumni')
+    connectionstatus = None
     connectiondetails = Connection.query.filter_by(sender_id=session.get('userid'),receiver_id=alumniuserid).first()
     if connectiondetails:
         connectionstatus = connectiondetails.status

@@ -166,6 +166,8 @@
                     {% elif connectionstatus=="accepted" %}
                         Connected
                     {% elif connectionstatus=="rejected" %}
+                        Sorry
+                    {% elif connectionstatus==None %}
                         Connect
                     {% endif %}
 
