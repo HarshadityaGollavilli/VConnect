@@ -564,7 +564,7 @@ def connectusers(receiver_id):
     )
     db.session.add(insert_connection)
     db.session.commit()
-    session['receiver_id'] = receiver_id
+    # session['receiver_id'] = receiver_id
     return redirect(f"/viewprofile/{receiver_id}")
 
 
