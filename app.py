@@ -21,6 +21,9 @@ resend.api_key = RESEND_API_KEY
 app.secret_key=SECRET_KEY
 app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv("DATABASE_URL")
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+app.config["SQLALCHEMY_ENGINE_OPTIONS"] = {
+    "pool_pre_ping": True,
+}
 app.config['UPLOAD_FOLDER'] = 'static/profile_pics'
 db = SQLAlchemy(app)
 
