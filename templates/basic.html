@@ -40,6 +40,13 @@
     </div>
 
     <nav>
+        <div id="notification">
+            <button id="notificationbtn" class="notification-btn">🔔</button>
+            <div id="notificationpanel" class="notification-panel">
+                <h3 id="h3">Notifications</h3>
+                <p>Virat sent you a request to connect</p>
+            </div>
+        </div>
 
         <a href="/dashboard">Dashboard</a>
 
@@ -56,13 +63,26 @@
 </header>
 
 <main>
+    
+
 
     {% block body %}
     
     {% endblock %}
 
 </main>
-
+<script>
+    const btn = document.getElementById("notification");
+    const panel = document.getElementById("notificationpanel");
+    btn.addEventListener("click",function(){
+        if(panel.style.display=="none"){
+            panel.style.display = "block";
+        }
+        else{
+            panel.style.display="none"
+        }
+    });
+</script>
 </body>
 
 </html>

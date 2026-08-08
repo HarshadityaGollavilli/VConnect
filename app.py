@@ -106,6 +106,16 @@ class Connection(db.Model):
 
     def __repr__(self):
         return f"{self.sender_id}"
+
+class Suggestions(db.Model):
+    id = db.Column(db.Integer,primary_key=True)
+    user_id = db.Column(db.Integer)
+    message = db.Column(db.Text,nullable=False)
+    created_at = db.Column(db.DateTime)
+    def __repr__(self):
+        return f"{self.user_id}"
+
+
 @app.route('/login',methods=['POST','GET'])
 def login():
     if request.method=='POST':
@@ -569,6 +579,23 @@ def connectusers(receiver_id):
     db.session.commit()
     # session['receiver_id'] = receiver_id
     return redirect(f"/viewprofile/{receiver_id}")
+
+@app.route("/notifications")
+def notifications():
+    pass
+
+@app.route('/suggestions',methods=['GET','POST'])
+def user_suggestions():
+    if request.method=='POST':
+        user_suggestion = Suggestions(
+            user_id = session.get('userid'),
+            message = request.form['message'],
+            created_at = datetime.datetime.now()
+        )
+        db.session.add(user_suggestion)
+        db.session.commit()
+        return redirect('/dashboard')
+    return render_template('dashboard.html')
 
 
 if __name__ == "__main__":
