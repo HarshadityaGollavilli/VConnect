@@ -45,7 +45,7 @@
             <div id="notificationpanel" class="notification-panel">
                 <h3 id="h3">Notifications</h3>
                 {% for notification in notifications %}
-                    <p>{{% notification.message %}}</p>
+                    <p>{{ notification.message }}</p>
                 {% endfor %}
             </div>
         </div>
