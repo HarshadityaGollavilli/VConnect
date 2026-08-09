@@ -120,14 +120,12 @@ class Suggestions(db.Model):
 def login():
     if request.method=='POST':
         adminno = request.form['admn'].strip()
-        mobno = request.form['mob'].strip()
         passw = request.form['pass']
         # print("Admission entered:", adminno)
         # print("Mobile entered:", mobno)
 
         user = User.query.filter_by(
-            admission_number=adminno,
-            mobile_number=mobno,
+            admission_number=adminno
         ).first()
 
         # print("User found:", user)
@@ -138,11 +136,11 @@ def login():
                 session['username'] = user.name
                 return redirect('/dashboard')
             else:
-                return render_template('login.html',message='Invalid Credentials. Please Try Again')
+                return render_template('login.html',message='Invalid Password. Please Try Again')
         else:
             return render_template(
                 'login.html',
-                message='Invalid Admission Number or Mobile Number'
+                message='Invalid Admission Number or Password'
             )
     return render_template("login.html")
 
@@ -178,6 +176,7 @@ def dashboard():
 @app.route('/signup',methods=['GET','POST'])
 def signupuser():
     if request.method=='POST':
+        pattern = '1602-25-733-077'
         admission = request.form['adminno']
         name = request.form['fullname']
         mobile = request.form['regmbno']
@@ -188,6 +187,8 @@ def signupuser():
         tomail = request.form['email'].strip().lower()
         profile = request.files['profilepic']
         filename='default.png'
+        if admission[0:4]!='1602' or (not admission[5:7].isdigit()) or (not admission[8:11].isdigit()) or (not admission[-3:-1].isdigit()):
+            return render_template('signup.html',message="Admission Number must be in the form of 1602-xx-xx-xxx")
         if profile and profile.filename != "":
             filename = str(uuid.uuid4()) + "_" + secure_filename(profile.filename)
 
@@ -600,6 +601,6 @@ def user_suggestions():
 
 with app.app_context():
     db.create_all()
-    
+
 if __name__ == "__main__":
     app.run(debug=True)
