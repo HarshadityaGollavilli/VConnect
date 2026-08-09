@@ -118,7 +118,7 @@ class Suggestions(db.Model):
 
 class Notification(db.Model):
     id = db.Column(db.Integer,primary_key=True)
-    user_id = db.column(db.Integer,nullable=False)
+    user_id = db.Column(db.Integer,nullable=False)
     message = db.Column(db.Text,nullable=False)
     msgtype = db.Column(db.Text)
     is_read = db.Column(db.Boolean,default = False)
