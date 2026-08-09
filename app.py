@@ -116,6 +116,17 @@ class Suggestions(db.Model):
         return f"{self.user_id}"
 
 
+class Notification(db.Model):
+    id = db.Column(db.Integer,primary_key=True)
+    user_id = db.column(db.Integer,nullable=False)
+    message = db.Column(db.Text,nullable=False)
+    msgtype = db.Column(db.Text)
+    is_read = db.Column(db.Boolean,default = False)
+    created_at = db.Column(db.DateTime,default = datetime.datetime.now())
+
+    def __repr__(self):
+        return f"{self.message}"
+
 @app.route('/login',methods=['POST','GET'])
 def login():
     if request.method=='POST':
@@ -597,6 +608,17 @@ def user_suggestions():
         db.session.commit()
         return redirect('/dashboard')
     return render_template('dashboard.html')
+
+
+@app.context_processor
+def generate_notifications():
+    if 'userid' in session:
+        notifications = Notification.query.filter_by(
+            user_id = session.get('userid')
+        ).all()
+    else:
+        notifications = []
+    return dict(notifications=notifications)
 
 
 with app.app_context():
