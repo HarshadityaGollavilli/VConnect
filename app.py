@@ -116,8 +116,10 @@ class Suggestions(db.Model):
         return f"{self.user_id}"
 
 
+
 class Notification(db.Model):
     id = db.Column(db.Integer,primary_key=True)
+    sender_id = db.Column(db.Integer)
     user_id = db.Column(db.Integer,nullable=False)
     message = db.Column(db.Text,nullable=False)
     msgtype = db.Column(db.Text)
@@ -126,6 +128,22 @@ class Notification(db.Model):
 
     def __repr__(self):
         return f"{self.message}"
+
+class RetriveJobs(db.Model):
+    id = db.Column(db.Integer,primary_key=True)
+    external_id = db.Column(db.Integer)
+    title = db.Column(db.Text)
+    company = db.Column(db.Text)
+    location = db.Column(db.Text)
+    job_type = db.Column(db.Text)
+    description = db.Column(db.Text)
+    source = db.Column(db.Text)
+    source_url = db.Column(db.Text)
+    posted_at = db.Column(db.DateTime)
+    fetched_at = db.Column(db.DateTime,default=datetime.datetime.now)
+    
+    def __repr__(self):
+        return f"{self.company}"
 
 @app.route('/login',methods=['POST','GET'])
 def login():
@@ -589,8 +607,34 @@ def connectusers(receiver_id):
     )
     db.session.add(insert_connection)
     db.session.commit()
+    # receiver_details = User.query.filter_by(id = receiver_id).first()
+    send_notification = Notification(
+        user_id = receiver_id,
+        sender_id = session['userid'],
+        message = f"{session['username']} sent an invite to connect",
+        msgtype = 'connection_request'
+    )
+    db.session.add(send_notification)
+    db.session.commit()
     # session['receiver_id'] = receiver_id
     return redirect(f"/viewprofile/{receiver_id}")
+
+
+
+@app.route('/acceptinvitation/<int:notificationid>')
+def acceptinvitation(notificationid):
+    update_status = Connection(
+        sender_id = session['userid'],
+        receiver_id = notificationid,
+        status = 'accepted',
+        responded_at = datetime.datetime.now()
+    )
+    db.session.add(update_status)
+    db.session.commit()
+    return redirect('/dashboard')
+
+
+
 
 @app.route("/notifications")
 def notifications():

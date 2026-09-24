@@ -46,6 +46,11 @@
                 <h3 id="h3">Notifications</h3>
                 {% for notification in notifications %}
                     <p>{{ notification.message }}</p>
+                    {% if notification.msgtype=="connection_request" %}
+                        <a href="/acceptinvitation/{{ notification.id }}">
+                            Connect
+                        </a>
+                    {% endif %}
                 {% endfor %}
             </div>
         </div>
