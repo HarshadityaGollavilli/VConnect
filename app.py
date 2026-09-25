@@ -521,7 +521,7 @@ def jobs():
 @app.route('/browsejobs')
 def browsejobs():
     # if 'search' in i don't kno what to do here...
-    url = "https://jobs.indianapi.in/jobs"
+    url = "https://jobs.indianapi.in/jobs?limit=10"
     headers = {
         'X-Api-Key':os.getenv('JOBS_API')
     }
