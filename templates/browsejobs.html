@@ -47,9 +47,9 @@
 
                 <div>
 
-                    <h2>{{ item['jobTitle'] }}</h2>
+                    <h2>{{ item['title'] }}</h2>
 
-                    <h3>{{ item['companyName'] }}</h3>
+                    <h3>{{ item['company'] }}</h3>
 
                 </div>
 
@@ -57,11 +57,11 @@
 
             <div class="job-info">
 
-                <span>📍 {{ item['jobGeo'] }}</span>
+                <span>📍 {{ item['location'] }}</span>
 
-                <span>💼 {{ item['jobType'] }}</span>
+                <span>💼 {{ item['job_type'] }}</span>
 
-                <span>💰 Min Salary {{ item['salaryMin'] }}  💰 Max Salary {{item['salaryMax']}}</span>
+                <span>💰 Min Salary NA</span>
 
             </div>
 
@@ -69,7 +69,7 @@
 
 
                     <span class="skill-tag">
-                        {{ item['jobDescription'] | safe }}
+                        {{ item['job_description'] | safe }}
                     </span>
 
                 
@@ -82,13 +82,13 @@
 
                     <small>Shared by Alumni</small>
 
-                    <p>{{ item['companyName']}}</p>
+                    <p>{{ item['company']}}</p>
 
                 </div>
 
                 <div class="right">
 
-                    <small></small>
+                    <small>{{item['posted_data']}}</small>
 
                     <a href="">
                         View Details →

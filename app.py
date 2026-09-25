@@ -521,12 +521,14 @@ def jobs():
 @app.route('/browsejobs')
 def browsejobs():
     # if 'search' in i don't kno what to do here...
-    url = "https://jobicy.com/api/v2/remote-jobs?count=20"
+    url = "https://jobs.indianapi.in/jobs"
+    headers = {
+        'X-Api-Key':os.getenv('JOBS_API')
+    }
     try:
-        response = requests.get(url)
+        response = requests.get(url,headers=headers)
         response.raise_for_status()
-        data = response.json()
-        joblist = data['jobs']
+        joblist = response.json()
     except requests.exceptions.RequestException as e:
         print(e)
     return render_template('browsejobs.html',joblist=joblist)
