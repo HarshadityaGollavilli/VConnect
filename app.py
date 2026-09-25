@@ -119,12 +119,12 @@ class Suggestions(db.Model):
 
 class Notification(db.Model):
     id = db.Column(db.Integer,primary_key=True)
-    sender_id = db.Column(db.Integer)
+    # sender_id = db.Column(db.Integer)
     user_id = db.Column(db.Integer,nullable=False)
     message = db.Column(db.Text,nullable=False)
     msgtype = db.Column(db.Text)
     is_read = db.Column(db.Boolean,default = False)
-    created_at = db.Column(db.DateTime,default = datetime.datetime.now())
+    created_at = db.Column(db.DateTime,default = datetime.datetime.now)
 
     def __repr__(self):
         return f"{self.message}"
