@@ -47,9 +47,9 @@
 
                 <div>
 
-                    <h2>{{ item['job'].jobtitle }}</h2>
+                    <h2>{{ item['jobTitle'] }}</h2>
 
-                    <h3>{{ item['job'].companyname }}</h3>
+                    <h3>{{ item['companyName'] }}</h3>
 
                 </div>
 
@@ -57,23 +57,22 @@
 
             <div class="job-info">
 
-                <span>📍 {{ item['job'].location }}</span>
+                <span>📍 {{ item['jobGeo'] }}</span>
 
-                <span>💼 {{ item['job'].jobtype }}</span>
+                <span>💼 {{ item['jobType'] }}</span>
 
-                <span>💰 {{ item['job'].salary }}</span>
+                <span>💰 Min Salary {{ item['salaryMin'] }} Max Salary {{item['salaryMax']}}</span>
 
             </div>
 
             <div class="skills">
 
-                {% for skill in item['job'].skillsreq.split(',') %}
 
                     <span class="skill-tag">
-                        {{ skill.strip() }}
+                        {{ item['jobDescription'] }}
                     </span>
 
-                {% endfor %}
+                
 
             </div>
 
@@ -83,15 +82,15 @@
 
                     <small>Shared by Alumni</small>
 
-                    <p>{{ item['user'].name }}</p>
+                    <p>{{ item['companyName']}}</p>
 
                 </div>
 
                 <div class="right">
 
-                    <small>{{ item['job'].dateposted }}</small>
+                    <small>{{ }}</small>
 
-                    <a href="/viewdetails/{{ item['job'].jobid }}">
+                    <a href="">
                         View Details →
                     </a>
 

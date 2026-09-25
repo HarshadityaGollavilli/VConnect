@@ -11,6 +11,7 @@ from werkzeug.security import generate_password_hash,check_password_hash
 import uuid
 import datetime
 import resend
+import requests
 load_dotenv()
 app = Flask(__name__)
 MAIL_USERNAME = os.getenv("MAIL_USERNAME")
@@ -520,21 +521,14 @@ def jobs():
 @app.route('/browsejobs')
 def browsejobs():
     # if 'search' in i don't kno what to do here...
-    search = request.args.get('search')
-    if search:
-        all_jobs = JobData.query.filter(
-            or_(
-                JobData.jobtitle.ilike(f"%{search}%"),
-                JobData.companyname.ilike(f"%{search}%"),
-                JobData.skillsreq.ilike(f"%{search}%")
-            )
-        ).order_by(JobData.dateposted.desc()).all()
-    else:
-        all_jobs = JobData.query.order_by(JobData.dateposted.desc()).all()
-    joblist = []
-    for job in all_jobs:
-        conuser = User.query.filter_by(id=job.userid).first()
-        joblist.append({'job':job,'user':conuser})
+    url = "https://jobicy.com/api/v2/remote-jobs?count=20"
+    try:
+        response = requests.get(url)
+        response.raise_for_status()
+        data = response.json()
+        joblist = data['jobs']
+    except requests.exceptions.RequestException as e:
+        print(e)
     return render_template('browsejobs.html',joblist=joblist)
 
 @app.route('/viewdetails/<int:jobid>')
