@@ -61,7 +61,7 @@
 
                 <span>💼 {{ item['jobType'] }}</span>
 
-                <span>💰 Min Salary {{ item['salaryMin'] }} Max Salary {{item['salaryMax']}}</span>
+                <span>💰 Min Salary {{ item['salaryMin'] }}  💰 Max Salary {{item['salaryMax']}}</span>
 
             </div>
 
@@ -69,7 +69,7 @@
 
 
                     <span class="skill-tag">
-                        {{ item['jobDescription'] }}
+                        {{ item['jobDescription'] | safe }}
                     </span>
 
                 
